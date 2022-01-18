@@ -1,0 +1,19 @@
+{% extends "auctions/layout2.html" %}
+{%load static%}
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for auctions in watcher.Item %}
+    {% for auction in auctions%}
+      <div >
+           <h3> {{auction.Title}}</h3>
+           <div > {{auction.Description}}</div>
+           <img src="{{auction.ImageURL}}" alt="{{auction.Title}}" width="500px" height="500px">
+           <h5> price = $ {{auction.Startingbid}} USD</h5>
+           <a href="wishlist/{{auction.id}}">Add to wishlist</a>
+          <a href= "/{{auction.id}}"> Full here </a>
+     </div>
+    {%endfor%}</br>
+    {%endfor%}
+   TODO
+
+{% endblock %}

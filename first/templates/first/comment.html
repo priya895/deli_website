@@ -1,0 +1,14 @@
+{% extends "first/layout.html" %}
+
+{% block body %}
+        <h3> Add your Comment Here </h3>
+         {%csrf_token%}
+        <form action="{% url 'comment' id %}" method="post">
+             {% csrf_token %}
+             <div class="form-group">
+                 <input class="form-control" style="width:350px;" autofocus type="text" name="comment" placeholder="Comment here">
+             </div>
+             <input class="btn btn-primary" type="submit" value="Add">
+        </form>
+        
+{% endblock %}

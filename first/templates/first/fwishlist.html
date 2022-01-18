@@ -1,0 +1,15 @@
+{% extends "first/layout.html" %}
+{%load static%}
+{% block body %}
+wishlist 
+    {% for a in products%}
+      <div >
+           <h3> {{a.Title}}</h3>
+           <div > {{a.description}}</div>
+           <img src="{{a.ImageURL}}" alt="{{a.Title}}" width="500px" height="500px">
+          <a href= "/{{a.id}}"> Full here </a>
+     </div>
+    {%endfor%}<br/>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "first/layout.html" %}
+{% load static %}
+
+{% block header %}
+    <h3>Welcome To This Site</h3>
+{% endblock %}
+
+{% block body %}
+{% if wishlist %}
+<h1> Your Wishlist</h1>
+{% endif %}
+    <div style="margin-left:51px;font-family:sans-serif">
+        <h4 style="text-align:center;">Products</h4>
+        <a style="position:absolute; font-size:25px;TOP:160px; RIGHT:50px;" href="auction">Auctions-></a>
+        {% for product in p %}
+        <div style= "height:550px; width: 415px ;border:20px 20px 20px 0px solid #dcdcdc ; outline:none; float:left" >
+            <h5>{{product.Title}}</h5> 
+             {% if product.Image %}
+             <img src="{{ product.Image.url }}" alt="{{product.Title}}" width="170px" height="200px"><br/>
+             {% endif %}
+             {{product.Description}}
+             <h6>Price: Rs.{{product.price}}</h6>
+            <div>
+             <ul style="list-style-type:none;">  
+                <li> <a href= "fshow/{{product.id}}" style = "margin-left:5px; margin-right:5px"> View Here</a>
+                {% comment %} <li> <a href="/addtocart/{{product.id}}" style = "margin-left:5px; margin-right:5px">Add to cart</a> {% endcomment %}
+                <li> <a href= "/comment/{{product.id}}" style = "margin-left:5px; margin-right:5px">Comment Here</a>
+                {% comment %} <li> <a href= "/rating/{{product.id}}" style = "margin-left:5px; margin-right:5px">Rate Here</a> {% endcomment %}
+                {% if wishlist %}
+                    <li> <a href= "{% url 'removewish' product.id %}" style = "margin-left:5px; margin-right:5px"> Remove from wishlist </a>
+                 {% else %}
+                    <li> <a href= "{% url 'addwish' product.id %}" style = "margin-left:5px; margin-right:5px"> Add to Wishlist </a>  
+                {% endif%}
+                {% if cart %}
+                    <li> <a href= "{% url 'removecart' product.id %}" style = "margin-left:5px; margin-right:5px"> Remove from cart</a>
+                 {% else %}
+                    <li> <a href= "{% url 'addcart' product.id %}" style = "margin-left:5px; margin-right:5px"> Add to cart</a>  
+                {% endif %} 
+             </ul> 
+            </div>
+        </div>
+        {% endfor %} <br/>
+    </div> <br/>
+{% endblock %}
+

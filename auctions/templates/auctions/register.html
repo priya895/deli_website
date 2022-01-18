@@ -1,0 +1,31 @@
+{% extends "first/layout2.html" %}
+{%load static%}
+{% block body %}
+
+    <h2>Register</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input style="width:250px;" class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input style="width:250px;" class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input style="width:250px;" class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input style="width:250px;" class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Create">
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "auctions/layout2.html" %}
+{%load static%}
+{% block body %}
+
+<div style=" font-family: sans-serif;font-size: 20px; margin-left:10px;border-left:10px ;text-align:center">
+ <h3>{{auction.Title}}</h3>
+ <div>{{auction.Description}}</div></br>
+ <img style = "height:500px;width: 500px;"src={{auction.ImageURL}} alt= "{{title}}"></br>
+ <strong>Owner</strong> : {{auction.Creator}}</br>
+ <strong>price </strong>: {{auction.Startingbid}} USD</br>
+ <strong> Current price</strong> : {{auction.Currentbid}} USD</br>
+
+{% ifequal user.username|lower auction.Win|lower %}
+    Congratulations!! you won this auction
+{% endifequal %}</br>
+{% if auction.Win is not none%}
+    Winner of this listing: {{auction.Win}}
+{%endif%}
+
+{% ifequal user.username|lower auction.Creator|lower %}
+    <a href = "/close/{{id}}" > Close Auction</a>
+{% endifequal %}
+{% if message %}
+    <div>{{ message }}</div>
+{% endif %}
+{% ifnotequal user.username|lower auction.Creator|lower%}
+{% if auction.Active%}
+ <a href= "/placebid/{{id}}" style = "margin-left:5px; margin-right:5px"> Place Bid </a>
+{%endif%}
+{%endifnotequal%}
+ <h3> Comments </h3>
+ {% for comment in comments%}
+ <strong>{{comment.watcher}}</strong> : {{comment.comment}}<br>
+ {%endfor%}
+<a href="/addcomment/{{id}}"> Add comment </a>
+</div>
+{% endblock %}

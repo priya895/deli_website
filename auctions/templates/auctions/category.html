@@ -1,0 +1,14 @@
+{% extends "auctions/layout2.html"%}
+{%load static%}
+{% block body%}
+<form action="{% url 'category' %}" method="post">
+    {% csrf_token %}
+     <select style ="height: 38px; width: 300px;" class="form-select" aria-label="Default select example" name="category" >
+        {% for category in list %}
+            <option value="{{ category.id }}">{{ category.type }}</option>
+        {% endfor %}
+     </select>
+     <br/>
+    <input class="btn btn-primary" type="submit" value ="search">
+</form>
+{%endblock%}

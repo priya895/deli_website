@@ -1,0 +1,17 @@
+{%  extends "first/layout.html" %}
+
+{% block body %}
+<form action="{% url 'post' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <div class="form-group">
+        <input class="form-control" autofocus type="text" name="Title" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="Description" placeholder="Description">
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value="Register">
+</form>
+{% endblock %}

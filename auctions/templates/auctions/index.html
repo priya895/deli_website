@@ -1,0 +1,32 @@
+{% extends "auctions/layout2.html" %}
+{%load static%}
+{% block body %}
+    <div style="margin-left:50px;font-family:sans-serif">
+    <h3> Listings</h3>
+    <a style="position:absolute; font-size:25px;TOP:160px; RIGHT:50px;" href="/"><-Ecommerce</a>
+    {% csrf_token %}
+    {% for auction in auctions %}
+      <div style= "height:550px; width: 415px ;border:20px 20px 20px 0px solid #dcdcdc ; outline:none; float:left"  >
+          <h3> {{auction.Title}}</h3>
+          {% if auction.ImageURL %}
+          <img src="{{ auction.ImageURL.url }}" alt="{{auction.Title}}" width="150px" height="150px">
+         {% endif %}
+         {{auction.description}} 
+          <div>
+          <ul style="list-style-type:none;">
+            <li> <a href= "{% url 'show' auction.id %}" style = "margin-left:5px; margin-right:5px"> Full here </a>
+            <li> <a href="/addcomment/{{auction.id}}" style = "margin-left:5px; margin-right:5px"> Add comment </a>
+            <li> <a href= "/auctions/placebid/{{auction.id}}" style = "margin-left:5px; margin-right:5px"> Place Bid </a>
+             {% if wishlist%}
+                <li> <a href= "/remove/{{auction.id}}" style = "margin-left:5px; margin-right:5px"> Remove from wishlist </a>
+             {% else%}
+                <li> <a href= "/wishlist/{{auction.id}}" style = "margin-left:5px; margin-right:5px"> Add to Wishlist </a> 
+             {% endif%}
+          </ul>
+          </div>
+          <h5> Price = $ {{auction.Startingbid}} USD</h5>
+      </div>
+    {%endfor%} <br/>
+    </div><br/>
+
+{% endblock %}
